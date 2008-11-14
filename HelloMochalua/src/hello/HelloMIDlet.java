@@ -181,7 +181,6 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
                 lua_State L = LuaAPI.lua_newstate();
                 LuaAPI.luaL_openlibs ( L );
 
-                // main.out calls 'dofile' on errors/errors.out
                 int status = LuaAPI.luaL_loadfile( L, "/hello.out" );
 
                 if ( status != 0 ) {
