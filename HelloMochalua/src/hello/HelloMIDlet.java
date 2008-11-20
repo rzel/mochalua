@@ -209,7 +209,7 @@ public class HelloMIDlet extends MIDlet implements CommandListener {
                 }
             }
             catch ( Exception e ) {
-                System.out.println ( e.getMessage ());
+                e.printStackTrace();
             }
         }
         midletPaused = false;
