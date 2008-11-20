@@ -1489,7 +1489,7 @@ public class LuaAPI {
         }
         catch ( Exception ex ) {
             status = -1;
-            lua_pushstring ( thread, "a java exception occurred within the coroutine" );
+			ex.printStackTrace();
         }
         return status;
     }
