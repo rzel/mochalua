@@ -1490,6 +1490,7 @@ public class LuaAPI {
         catch ( Exception ex ) {
             status = -1;
 			ex.printStackTrace();
+			LuaAPI.lua_pushstring(thread, ex.toString() + " was caused by a function call in the coroutine. See above stack trace for more details.");
         }
         return status;
     }
