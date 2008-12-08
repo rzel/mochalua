@@ -257,26 +257,28 @@ class LuaPackageLib {
             return false;
         }
 
-        private static String pushnexttemplate ( lua_State thread, String path ) {
-            String l;
-            while ( path.length () != 0 && path.substring ( 0, 1 ).equals ( LUA_PATHSEP ) ) {
+	private static String pushnexttemplate( lua_State thread, String path )
+	{
+            // Skip leading ';'s            
+            while ( path.length () != 0 && path.substring ( 0, 1 ).equals ( LUA_PATHSEP ) ) 
+	    {
                 path = path.substring ( 1 );
             }
-            if ( path.equals ( "" ) ) {
-                return null;
-            }
+            if (path.equals("")) return null;
 
             int iInstanceOfPath = path.indexOf ( LUA_PATHSEP );
-            if ( iInstanceOfPath == -1 ) {
-                l = "";
+            if ( iInstanceOfPath == -1 ) 
+	    { // last template
+                LuaAPI.lua_pushstring ( thread, path);
+            	return "";
             }
-            else {
-                l = path.substring ( iInstanceOfPath );
+            else 
+	    {
+                String l = path.substring ( iInstanceOfPath );
+                LuaAPI.lua_pushlstring ( thread, path, iInstanceOfPath );
+                return l;
             }
-
-            LuaAPI.lua_pushlstring ( thread, path, iInstanceOfPath );
-            return l;
-        }
+	}
 
         private static String findfile ( lua_State thread, String name, String pname ) {
             String path;
